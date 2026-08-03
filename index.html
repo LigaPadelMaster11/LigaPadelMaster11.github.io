@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga Padel Master v2</title>
+    <style>
+        :root {
+            --primary: #ccff00; /* El color amarillo flúor característico de la pelota de pádel */
+            --primary-rgb: 204, 255, 0;
+            --dark-bg: #0a0f1d; /* Un azul marino ultra profundo, elegante e institucional de cancha de pádel */
+            --card-bg: #131a30; /* Un azul intermedio pulido para las tarjetas y contenedores */
+            --card-hover: #1b2442;
+            --text: #f1f5f9; /* Blanco nítido para una lectura perfecta */
+            --text-muted: #64748b; /* Texto secundario grisáceo */
+            --whatsapp: #25d366;
+            --ying-color: #38bdf8; /* Azul cielo sutil para la Zona Ying */
+            --yang-color: #fb923c; /* Coral/Naranja suave para la Zona Yang */
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Montserrat', 'Segoe UI', -apple-system, sans-serif;
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Cintillo de Cuenta Regresiva Estilo Marcador Electrónico - REPARADO */
+        #countdown {
+            background: rgba(19, 26, 48, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 12px 10px;
+            font-size: 0.68rem; /* Un pelín más chico en móviles para que entre en un solo renglón */
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px; /* Un espacio entre letras más delicado */
+            border-bottom: 1px solid rgba(204, 255, 0, 0.15);
+            line-height: 1.4; /* Le da colchón vertical si el celular es muy viejo y llega a quebrar el texto */
+            box-sizing: border-box;
+        }
+
+        /* Barra de Navegación Premium - SOLUCIÓN DEFINITIVA DE CONTROL DE LÍNEA */
+        nav {
+            background: rgba(10, 15, 29, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 12px 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            
+            /* Forzado de filas flexibles con control de altura de renglón */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px 6px; /* 12px de separación obligatoria entre filas de botones */
+            line-height: 1; /* Resetea el renglón del contenedor para que no herede espacios raros */
+            
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; /* Un pelín más pequeña en celulares para evitar desbordes */
+            cursor: pointer; 
+            padding: 8px 10px; /* Reducido levemente para dar más aire entre botones */
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            letter-spacing: 0.5px;
+            
+            /* Aislamiento de caja indestructible */
+            display: inline-block;
+            text-align: center;
+            line-height: 1.2; /* Control estricto del texto interno del botón */
+            white-space: nowrap; /* Evita que una palabra larga se parta en dos renglones dentro del botón */
+            box-sizing: border-box;
+        }
+
+        /* Ajuste para pantallas más grandes (Tablets y Computadoras) */
+        @media (min-width: 480px) {
+            #countdown {
+                font-size: 0.75rem;
+                letter-spacing: 2.5px;
+                padding: 14px;
+            }
+        }
+
+        /* Header con la Atmósfera de la Cancha de Cristal */
+        header {
+            padding: 100px 20px;
+            text-align: center;
+            background: radial-gradient(circle at top, #162244 0%, var(--dark-bg) 75%);
+            position: relative;
+        }
+
+        header h1 { 
+            font-size: 2.6rem; 
+            font-weight: 800;
+            margin: 0; 
+            color: #ffffff; 
+            text-transform: uppercase; 
+            letter-spacing: 6px;
+            line-height: 1.2;
+        }
+        
+        header p {
+            font-size: 0.85rem;
+            color: var(--primary);
+            letter-spacing: 4px;
+            margin-top: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 40px 20px; 
+            min-height: 70vh; 
+        }
+
+        /* Títulos de Sección Estilizados */
+        h2 { 
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            margin-top: 50px; 
+            margin-bottom: 30px;
+            text-transform: uppercase; 
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        /* Badges Especiales de las Zonas */
+        .zona-title { 
+            font-size: 0.85rem; 
+            font-weight: 700;
+            margin-top: 35px; 
+            margin-bottom: 20px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            padding: 6px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
+        .zona-title.ying { 
+            color: var(--ying-color); 
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .zona-title.yang { 
+            color: var(--yang-color); 
+            background: rgba(251, 146, 60, 0.08);
+            border: 1px solid rgba(251, 146, 60, 0.2);
+        }
+
+        h3.fecha-title { 
+            color: var(--primary); 
+            margin-top: 35px; 
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary); 
+            padding-bottom: 6px; 
+            display: inline-block;
+        }
+
+        /* Iframe contenedor */
+        .form-container { 
+            position: relative; 
+            overflow: hidden; 
+            width: 100%; 
+            padding-top: 120%; 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+        @media (min-width: 768px) { .form-container { padding-top: 800px; } }
+        .form-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Tarjetas Flotantes de los Equipos */
+        .teams-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); 
+            gap: 24px; 
+            margin-bottom: 50px; 
+        }
+        
+        .team-card { 
+            background: var(--card-bg); 
+            padding: 26px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color); 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative; 
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-card h3 {
+    padding-right: 130px; /* Deja espacio libre a la derecha para que el comodín nunca tape el texto */
+        }
+        
+        .team-card:hover { 
+            transform: translateY(-4px);
+            border-color: rgba(204, 255, 0, 0.25);
+            background: var(--card-hover);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .comodin-status { 
+            position: absolute; 
+            top: 26px; 
+            right: 26px; 
+            font-size: 0.65rem; 
+            font-weight: 700;
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            background: rgba(204, 255, 0, 0.05); 
+            color: var(--primary); 
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(204, 255, 0, 0.2);
+        }
+        
+        /* Lista Desplegable */
+        .member-list { 
+            margin-top: 20px; 
+            border-top: 1px solid var(--border-color); 
+            padding-top: 12px; 
+            display: none; 
+        }
+        
+        .member-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-size: 0.85rem; 
+            padding: 8px 0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.01); 
+            color: #cbd5e1;
+        }
+        
+        .capitan-name { 
+            font-weight: 600; 
+            color: #ffffff; 
+        }
+        
+        .position-badge { 
+            font-size: 0.6rem; 
+            padding: 3px 8px; 
+            border-radius: 4px; 
+            background: var(--primary); 
+            color: #000000; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Tablas Limpias y Profesionales */
+        .table-container { 
+            overflow-x: auto; 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            margin-bottom: 40px; 
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        
+        th { 
+            text-align: left; 
+            padding: 18px 24px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            color: var(--text-muted); 
+            font-size: 0.75rem; 
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        td { 
+            padding: 18px 24px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02); 
+            font-size: 0.88rem; 
+            color: #e2e8f0;
+        }
+        
+        tr:last-child td { border-bottom: none; }
+        
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        /* Módulos de Reglamento */
+        .regla-card { 
+            background: var(--card-bg); 
+            padding: 26px; 
+            border-radius: 16px; 
+            margin-bottom: 20px; 
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary); 
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .regla-card h3 { 
+            color: #ffffff; 
+            margin-top: 0; 
+            margin-bottom: 12px;
+            font-size: 0.95rem; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+        
+        .regla-card p { 
+            margin: 0 0 12px 0; 
+            font-size: 0.9rem; 
+            color: #cbd5e1;
+        }
+        .regla-card p:last-child { margin-bottom: 0; }
+        
+        .nota-importante { 
+            background: rgba(19, 26, 48, 0.5); 
+            padding: 22px; 
+            border-radius: 14px; 
+            border: 1px dashed rgba(204, 255, 0, 0.2); 
+            margin-top: 35px; 
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .alerta-expulsion { 
+            color: #ff5555; 
+            font-weight: 700; 
+            text-align: center; 
+            border: 1px solid rgba(255, 85, 85, 0.25); 
+            background: rgba(255, 85, 85, 0.03);
+            padding: 16px; 
+            border-radius: 12px;
+            margin-top: 35px; 
+            text-transform: uppercase; 
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* Foro de Noticias */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .news-card { 
+            background: var(--card-bg); 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary);
+            padding: 26px; 
+            position: relative; 
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .news-date { 
+            color: var(--text-muted); 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            margin-bottom: 6px; 
+            display: block; 
+        }
+        
+        .news-tag { 
+            position: absolute; 
+            top: 26px; 
+            right: 26px; 
+            background: var(--dark-bg); 
+            color: #ffffff; 
+            font-size: 0.6rem; 
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-card h3 { 
+            margin: 0 0 10px 0; 
+            color: #ffffff; 
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase; 
+        }
+        
+        .news-card p { margin: 0; font-size: 0.9rem; color: #cbd5e1; }
+
+        .hidden { display: none; }
+
+        /* Botón Compartir WhatsApp */
+        .share-btn {
+            background: transparent;
+            color: var(--whatsapp);
+            border: 1px solid rgba(37, 211, 102, 0.25);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .share-btn:hover { 
+            background: rgba(37, 211, 102, 0.04);
+            border-color: var(--whatsapp);
+        }
+
+        /* Footer */
+        footer { 
+            background: #050811; 
+            padding: 60px 20px; 
+            border-top: 1px solid var(--border-color); 
+            text-align: center; 
+            margin-top: 80px; 
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        
+        .map-button { 
+            background: transparent; 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 10px 24px; 
+            border-radius: 8px; 
+            font-size: 0.75rem; 
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 20px 0; 
+            display: inline-block; 
+            border: 1px solid var(--border-color); 
+            transition: all 0.2s ease;
+        }
+        .map-button:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            gap: 12px; 
+            max-width: 500px; 
+            margin: 25px auto 0 auto; 
+        }
+        
+        .ws-button { 
+            background: rgba(37, 211, 102, 0.03); 
+            color: var(--whatsapp); 
+            text-decoration: none; 
+            padding: 11px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            font-size: 0.75rem; 
+            display: inline-block; 
+            border: 1px solid rgba(37, 211, 102, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .ws-button:hover {
+            background: var(--whatsapp);
+            color: #ffffff;
+        }
+/* Estilos para asentar fechas ya jugadas */
+        .fecha-finalizada {
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        .fecha-finalizada:hover {
+            opacity: 0.8; /* Permite leerla con claridad si el usuario pasa el mouse */
+        }
+        .badge-finalizado {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+<div id="countdown">PRÓXIMA FECHA: Cargando...</div>
+
+<nav>
+    <a onclick="showSection('inicio')">Equipos</a>
+    <a onclick="showSection('noticias')">Noticias</a>
+    <a onclick="showSection('partidos')">Partidos</a>
+    <a onclick="showSection('calendario')">Próximas Fechas</a>
+    <a onclick="showSection('posiciones')">Posiciones</a>
+    <a onclick="showSection('reglamento')">Reglamento</a>
+    <a onclick="showSection('inscripcion')" style="border: 1px solid var(--primary); color: var(--primary); padding: 7px 15px;">Inscribirse</a>
+</nav>
+
+<header>
+    <h1>LIGA PADEL MASTER v2</h1>
+    <p>EDICIÓN POR EQUIPOS | ESPERANZA</p>
+</header>
+
+<div class="container">
+    
+    <section id="inscripcion" class="hidden">
+        <h2>Formulario de Inscripción</h2>
+        <div class="form-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRELM4SUdZuFpZ4TEqqhduF2LYGpu6dOcJ5MNoN8YyAoRvtw/viewform?usp=dialog">Cargando formulario...</iframe>
+        </div>
+    </section>
+
+    <section id="noticias" class="hidden">
+        <h2>Foro de Noticias</h2>
+        <div id="news-container" class="news-grid">
+
+            <div class="news-card">
+                <span class="news-date">05-07-2026</span>
+                <span class="news-tag" style="background: #ff5555;">Calendario</span>
+                <h3>🚨 REPROGRAMACIÓN: Fecha 3 se traslada al 16-07</h3>
+                <p>Se les comunica a todos los equipos que la Fecha 3 (programada originalmente para el próximo jueves 09-07) se traslada oficialmente al jueves de la semana siguiente (se sometió a votación de capitanes). Motivo: Se conmemoria el día de la independencia Argentina, por lo cual estarian ausentes la gran mayoria de jugadores.</p>
+            </div>
+
+            <div class="news-card">
+                <span class="news-date">02-07-2026</span>
+                <span class="news-tag" style="background: var(--card-hover);">Estrategia</span>
+                <h3>🃏 Comodín Activado: Red Point</h3>
+                <p>El capitán del equipo Red Point ha solicitado formalmente hacer uso de uno de sus dos comodines reglamentarios. El estado del mismo ya fue actualizado y asentado como 'USADO' en rojo en el panel principal de equipos.</p>
+            </div>
+            
+            <div class="news-card">
+                <span class="news-date">20-06-2026</span>
+                <span class="news-tag" style="background: #ff5555;">Calendario</span>
+                <h3>🚨 REPROGRAMACIÓN: Fecha 2 se traslada al 02-07</h3>
+                <p>Se les comunica a todos los equipos que la Fecha 2 (programada originalmente para el próximo jueves 25-06) se traslada oficialmente al jueves de la semana siguiente, 2 de julio. Motivo: Se disputa un importante Torneo en la ciudad de Esperanza en el cual la gran mayoría de los jugadores de nuestra liga se encuentran afectados y participando.</p>
+            </div>
+
+            <div class="news-card">
+                <span class="news-date">18-06-2026</span>
+                <span class="news-tag" style="background: var(--card-hover);">Estrategia</span>
+                <h3>🃏 Comodín Activado: Fernet Branca</h3>
+                <p>El capitán del equipo Fernet Branca ha solicitado formalmente hacer uso de uno de sus dos comodines reglamentarios. El estado del mismo ya fue actualizado y asentado como 'USADO' en rojo en el panel principal de equipos.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="inicio">
+        <h2>Equipos y Comodines</h2>
+        
+        <div class="zona-title ying">Zona Ying</div>
+        <div id="teams-container-ying" class="teams-grid">
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Abandonados</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Marce Sieguel</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Franco Pacheco</span></div>
+                    <div class="member-item"><span>Joel Konig</span></div>
+                    <div class="member-item"><span>Chiqui Brossio</span></div>
+                    <div class="member-item"><span>Rodri Strack</span></div>
+                    <div class="member-item"><span>Mati Oberlin</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Rompecristales</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">José Zequin</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Facu Niello</span></div>
+                    <div class="member-item"><span>Edu Chacon</span></div>
+                    <div class="member-item"><span>Ale Fuhr</span></div>
+                    <div class="member-item"><span>Nico Kuzmik</span></div>
+                    <div class="member-item"><span>Fabri Profe</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Punto y Asado</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Jorge Basset</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Ale Zuber</span></div>
+                    <div class="member-item"><span>Pablo Beresvil</span></div>
+                    <div class="member-item"><span>Guille Zhender</span></div>
+                    <div class="member-item"><span>Mauri Chautemps</span></div>
+                    <div class="member-item"><span>Bruno de la Fuente</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Sin Globos no hay Paraiso</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Nico Audello</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Fer Repetti</span></div>
+                    <div class="member-item"><span>Marcos Ramirez</span></div>
+                    <div class="member-item"><span>Alex Galleano</span></div>
+                    <div class="member-item"><span>Bruno Correnti</span></div>
+                    <div class="member-item"><span>Ivan Castillo</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="zona-title yang">Zona Yang</div>
+        <div id="teams-container-yang" class="teams-grid">
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Los Branca</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">German Oreggioni</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Pocho Salvetti</span></div>
+                    <div class="member-item"><span>Nico Wenke</span></div>
+                    <div class="member-item"><span>Mauro Perbellini</span></div>
+                    <div class="member-item"><span>Juanchi Perren</span></div>
+                    <div class="member-item"><span>Facu Hilgert</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status">COMODÍN: DISPONIBLE</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">El Retorno de la Sordeta</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Juan Weiner</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Cuero Falkemberg</span></div>
+                    <div class="member-item"><span>Noe Montenegro</span></div>
+                    <div class="member-item"><span>Alan Alan</span></div>
+                    <div class="member-item"><span>Fer Villata</span></div>
+                    <div class="member-item"><span>Jona Perrig</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                 <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Red Point</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Turco Taris</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Emi Villar</span></div>
+                    <div class="member-item"><span>Fer Simonetto</span></div>
+                    <div class="member-item"><span>Fede Turletti</span></div>
+                    <div class="member-item"><span>Mica Nagel</span></div>
+                    <div class="member-item"><span>Josue Montenegro</span></div>
+                </div>
+            </div>
+
+            <div class="team-card" onclick="toggleTeam(this)">
+                <span class="comodin-status" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.3); background: rgba(255, 85, 85, 0.05);">COMODÍN: USADO</span>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.15rem; text-transform: uppercase;">Fernet Branca</h3>
+                <div class="member-list">
+                    <div class="member-item"><span class="capitan-name">Ariel Escalera</span> <span class="position-badge">CAPITÁN</span></div>
+                    <div class="member-item"><span>Puche Claudio Pucheta</span></div>
+                    <div class="member-item"><span>Ramon Dobler</span></div>
+                    <div class="member-item"><span>Juli Tschaggeny</span></div>
+                    <div class="member-item"><span>Roy Roy</span></div>
+                    <div class="member-item"><span>Fefi Montardit</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="partidos" class="hidden">
+        <h2>Próximos Cruces</h2>
+        <button class="share-btn" onclick="compartirWhatsApp('partidos')">🟢 Compartir Cruces</button>
+        
+        <div class="zona-title ying">Próxima Fecha - Zona Ying</div>
+        <div class="table-container">
+            <table id="tabla-proximos-cruces-ying">
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Local</th>
+                        <th>vs</th>
+                        <th>Visitante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cancha 1</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Punto y Asado</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Los Rompecristales</td>
+                    </tr>
+                    <tr>
+                        <td>Cancha 2</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Los Abandonados</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Sin Globos no hay Paraiso</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="zona-title yang">Próxima Fecha - Zona Yang</div>
+        <div class="table-container">
+            <table id="tabla-proximos-cruces-yang">
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Local</th>
+                        <th>vs</th>
+                        <th>Visitante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cancha 3</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Red Point</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>El Retorno de la Sordeta</td>
+                    </tr>
+                    <tr>
+                        <td>Cancha 4</td>
+                        <td>19:30 a 22:30</td>
+                        <td>Los Branca</td>
+                        <td style="color: var(--primary); font-weight: bold;">vs</td>
+                        <td>Fernet Branca</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Resultados Fecha Anterior</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Hora</th>
+                        <th>Encuentro</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                            Los resultados se actualizarán al finalizar la fecha en curso.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="calendario" class="hidden">
+        <h2>Calendario de la Liga</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -15px; margin-bottom: 25px;">* Sujeto a cambios por la organización. Sistema todos contra todos ida y vuelta por zona.</p>
+
+        <!-- FECHA 1 -->
+        <h3 class="fecha-title">Fecha 1 <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 2 -->
+        <h3 class="fecha-title">Fecha 2 <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 3 -->
+        <h3 class="fecha-title">Fecha 3 <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
+
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 4 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 4 (Segunda Vuelta) <span class="badge-finalizado">✓ FINALIZADA</span></h3>
+        <div class="table-container fecha-finalizada">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Rompecristales <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Punto y Asado</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Retorno de la Sordeta <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> Red Point</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 5 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 5 (Segunda Vuelta)</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Los Abandonados <strong style="color: var(--primary);">vs</strong> Sin Globos no hay Paraiso</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Los Branca <strong style="color: var(--primary);">vs</strong> Fernet Branca</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FECHA 6 (VUELTA) -->
+        <h3 class="fecha-title">Fecha 6 (Segunda Vuelta)</h3>
+        <div class="table-container">
+            <table>
+                <tbody>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Punto y Asado <strong style="color: var(--primary);">vs</strong> Los Abandonados</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Sin Globos no hay Paraiso <strong style="color: var(--primary);">vs</strong> Los Rompecristales</td></tr>
+                    <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Red Point <strong style="color: var(--primary);">vs</strong> Los Branca</td></tr>
+                    <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Fernet Branca <strong style="color: var(--primary);">vs</strong> El Retorno de la Sordeta</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="posiciones" class="hidden">
+        <h2>Tablas de Posiciones</h2>
+        <button class="share-btn" onclick="compartirWhatsApp('posiciones')">🟢 Compartir Tablas</button>
+        
+        <div class="zona-title ying">Posiciones - Zona Ying</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>Pts</th>
+                        <th>PJ</th>
+                        <th>DS</th>
+                        <th>DG</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-posiciones-ying-body"></tbody>
+            </table>
+        </div>
+
+        <div class="zona-title yang">Posiciones - Zona Yang</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>Pts</th>
+                        <th>PJ</th>
+                        <th>DS</th>
+                        <th>DG</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-posiciones-yang-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="reglamento" class="hidden">
+        <h2>Reglamento de la Liga</h2>
+        
+        <div class="regla-card">
+            <h3>1. Formato de Juego</h3>
+            <p>Se disputarán 2 sets con <strong>Punto de Oro</strong>. En caso de empate en sets, se definirá por un <strong>Super Tiebreak a 11 puntos</strong> (sin diferencia de dos).</p>
+            <p><strong>Frecuencia:</strong> Todos los equipos jugarán <strong>12 partidos TODOS los jueves</strong>, repartidos en los 3 horarios posibles (19:30 - 20:30 - 21:30hs).</p>
+            <p>De esta manera, si algún jugador tiene problemas con un horario específico, podrá organizarse con su capitán para jugar en el turno que le quede más conveniente de los tres disponibles.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>2. Sistema de Puntaje</h3>
+            <p>Ganado en 2 sets: <strong>+3 puntos</strong>. Ganado en 3 sets: <strong>+2 puntos</strong>.</p>
+            <p><strong>Premio Especial:</strong> El equipo que en una fecha gane los 3 partidos llevará <strong>+1 punto</strong> de premio extra.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>3. El Capitán</h3>
+            <p>Cada equipo designará un capitán que será el <strong>único nexo</strong> entre la organización and el equipo.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>4. Gestión de Formaciones</h3>
+            <p>Para evitar cambios de último momento, la organización asume que el equipo tiene cubiertos los tres turnos. El equipo decide internamente cómo salir a cancha en cada horario según disponibilidad y estrategia.</p>
+            <p><strong>Ausencias:</strong> Si un jugador falta, otro integrante deberá jugar 2 partidos ese día. Ese jugador que disputó 2 partidos no jugará la fecha siguiente, y el que se perdió el partido deberá jugar 2 partidos (para evitar ventajas deportivas).</p>
+            <p>Se contará con un listado de SUPLENTES, si llegado el caso no es posible que un compañero juegue 2 partidos en la misma fecha. Si por caso fortuito esto no es posible, deberán negociar con el capitán del equipo rival para aceptar las condiciones si no considera que hay ventaja.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>5. Puntualidad y Formación</h3>
+            <p>La organización no consultará la formación de cada partido; se maneja en privado entre los jugadores. Si un integrante llega <strong>10 minutos tarde</strong>, se le dará <strong>W.O.</strong> a ese partido, con un resultado de <strong>6-0 / 6-0</strong> para el equipo que se presentó a tiempo.</p>
+        </div>
+
+        <div class="regla-card">
+            <h3>6. Comodín (Estrategia)</h3>
+            <p>Se otorgarán <strong>2 comodínes </strong> a cada equipo, estos sirven para saber como va a salir a cancha en cada partido de la fecha el equipo rival (de esta manera organizar ESTRATEGICAMENTE, como jugarles). Al usarlo, el capitán informa a la organización, la cual exigirá al equipo contrario presentar su formación antes del martes previo.</p>
+            <p>El equipo rival no podrá mentir con su formación; en caso de incumplir, se aplicará un castigo a decidir entre los 4 capitanes. Si dos equipos que se enfrentan piden comodín, se le otorgará al primero que lo solicitó.</p>
+        </div>
+
+        <div class="nota-importante">
+            <strong>ACLARACIONES IMPORTANTES:</strong> La organización es ajena a problemas de clima, electricidad o desperfectos de terceros. Ante complicaciones, se decidirá cómo afrontarlas entre capitanes and organización.
+        </div>
+
+        <div class="alerta-expulsion">
+            SER RESPONSABLES, CORDIALES Y RESPETUOSOS. NO SE TOLERARÁ AGRESIÓN FÍSICA NI FALTAS DE RESPETO. EXPULSIÓN INMEDIATA.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Pte Sáenz Peña 1151, Esperanza, Santa Fe</p>
+    <a href="https://maps.google.com/?q=Pte+Sáenz+Peña+1151,+Esperanza,+Santa+Fe" target="_blank" class="map-button">📍 Ver Ubicación en Google Maps</a>
+</footer>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function toggleTeam(card) {
+        const memberList = card.querySelector('.member-list');
+        if (memberList) {
+            const isVisible = memberList.style.display === 'block';
+            memberList.style.display = isVisible ? 'none' : 'block';
+        }
+    }
+
+    // ==========================================
+    // BASE DE DATOS DE LA LIGA (CONFIGURACIÓN)
+    // ==========================================
+    const EQUIPOS = {
+        ying: ["Los Abandonados", "Los Rompecristales", "Punto y Asado", "Sin Globos no hay Paraiso"],
+        yang: ["Los Branca", "El Retorno de la Sordeta", "Red Point", "Fernet Branca"]
+    };
+
+    // ====== RESULTADOS OFICIALES CARGADOS - FECHA 1 ======
+    const resultadosFecha1 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Los Abandonados',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 7 },  // 7-5 / 6-2 (Gana Rompecristales +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 7 },  // 6-3 / 6-4 (Gana Rompecristales +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 }   // 5-7 / 2-6 (Gana Abandonados +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Punto y Asado', visitante: 'Sin Globos no hay Paraiso',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-4 / 6-2 (Gana Punto y Asado +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-2 / 6-2 (Gana Punto y Asado +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 13, gamesVis: 12 }  // 6-1 / 6-7 / 8-11 (Gana Sin Globos +2)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Los Branca',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 9 },  // 3-6 / 6-2 / 9-11 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 10 }, // 7-6 / 6-4 (Gana Sordeta +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-2 / 6-4 (Gana Sordeta +3)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Fernet Branca', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 16, gamesVis: 23 }, // 7-6 / 4-6 / 5-11 (Gana Red Point +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 2-6 / 4-6 (Gana Red Point +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 }  // 6-7 / 6-7 (Gana Red Point +3)
+            ]
+        }
+    ]; // <-- AQUÍ ESTABA EL ERROR, YA QUEDÓ CORREGIDO Y CERRADO
+
+    const resultadosFecha2 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Punto y Asado',
+            partidos: [
+                { setsLoc: 2, setsVis: 1, gamesLoc: 20, gamesVis: 14 },  // 6-2 / 3-6 / 11-6 (Gana Rompecristales +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-1 / 6-3 (Gana Rompecristales +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 2, gamesVis: 12 }   // 2-6 / 0-6 (Gana Punto y Asado +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Sin Globos no hay Paraiso', visitante: 'Los Abandonados',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 },  // 6-7 / 6-7 (Gana Abandonados +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 4, gamesVis: 12 },  // 1-6 / 3-6 (Gana Abandonados +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 }  // 3-6 / 3-6 (Abandonados +3)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-4 / 6-2 (Gana Sordeta +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 19 }, // 4-6 / 6-2 / 8-11 (Gana Red Point +2)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 17 }   // 6-1 / 4-6 / 11-10 (Gana Sordeta +2)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Fernet Branca', visitante: 'Los Branca',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 20, gamesVis: 18 }, // 6-7 / 6-0 / 8-11 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 9 },  // 6-4 / 7-5 (Gana Fernet Branca +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 }  // 6-1 / 6-4 (Gana Fernet Branca +3)
+            ]
+        }
+    ];
+
+const resultadosFecha3 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Abandonados', visitante: 'Punto y Asado',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 19 },  // 6-2 / 3-6 / 9-11 (Gana Punto y Asado +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 11, gamesVis: 14 },  // 6-7 / 5-7 (Gana Punto y Asado +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 17, gamesVis: 22 }   // 6-4 / 5-7 / 6-11 (Gana Punto y Asado +2)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Sin Globos no hay Paraiso',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 9 },  // 6-3 / 7-6 (Gana Rompecristales +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 2 },  // 6-1 / 6-1 (Gana Rompecristales +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 }  // 6-7 / 6-7 (Gana Sin Globos +3)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'Los Branca', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 10, gamesVis: 13 },  // 6-7 / 4-6 (Gana Red Point +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 16 }, // 6-3 / 4-6 / 11-7 (Gana Los Branca +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 3, gamesVis: 12 }   // 2-6 / 1-6 (Gana Red Point +3)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Fernet Branca',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 2, gamesVis: 12 }, // 0-6 / 2-6 (Gana Fernet Branca +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 21, gamesVis: 22 },  // 5-7 / 6-4 / 10-11 (Gana Fernet Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 2 }  // 6-1 / 6-1 (Gana Sordeta +3)
+            ]
+        }
+    ];
+
+const resultadosFecha4 = [
+        // ---------- ZONA YING ----------
+        {
+            zona: 'ying',
+            local: 'Los Rompecristales', visitante: 'Los Abandonados',
+            partidos: [
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 7 },  // 6-4 / 6-3 (Gana Rompecristales +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 23, gamesVis: 23 },  // 7-6 / 5-7 / 11-10 (Gana Rompecristales +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-3 / 6-3 (Gana Rompecristales +3)
+            ]
+        },
+        {
+            zona: 'ying',
+            local: 'Sin Globos no hay Paraiso', visitante: 'Punto y Asado',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 19, gamesVis: 17 },  // 3-6 / 6-0 / 10-11 (Gana Punto y Asado +2)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 18, gamesVis: 18 },  // 0-6 / 7-5 / 11-7 (Gana Sin Globos +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 9, gamesVis: 13 }  // 6-7 / 3-6 (Gana Punto y Asado  +3)
+            ]
+        },
+        // ---------- ZONA YANG ----------
+        {
+            zona: 'yang',
+            local: 'El Retorno de la Sordeta', visitante: 'Los Branca',
+            partidos: [
+                { setsLoc: 0, setsVis: 2, gamesLoc: 9, gamesVis: 13 },  // 5-7 / 4-6 (Gana Los Branca +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 12, gamesVis: 21 }, // 2-6 / 6-4 / 4-11 (Gana Los Branca +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-2 / 6-4 (Gana Sordeta +3)
+            ]
+        },
+        {
+            zona: 'yang',
+            local: 'Fernet Branca', visitante: 'Red Point',
+            partidos: [
+                { setsLoc: 1, setsVis: 2, gamesLoc: 15, gamesVis: 21 }, // 2-6 / 6-4 / 7-11 (Gana Red Point +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-3 / 6-3 (Gana Fernet Branca +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 21, gamesVis: 21 }  // 6-3 / 6-7 / 9-11 (Gana Red Point +2)
+            ]
+        }
+    ];
+ //
+
+    // ==========================================
+    // MOTOR DE CÁLCULO DE ESTADÍSTICAS Y TABLAS
+    // ==========================================
+    function calcularTablas() {
+        let stats = {};
+        ['ying', 'yang'].forEach(zona => {
+            EQUIPOS[zona].forEach(eq => {
+                stats[eq] = { nombre: eq, zona: zona, pts: 0, pj: 0, ds: 0, dg: 0 };
+            });
+        });
+
+        // Unificamos las tres fechas cargadas para el cálculo global de la tabla
+let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];
+
+        todosLosResultados.forEach(encuentro => {
+            let victoriasLoc = 0;
+            let victoriasVis = 0;
+
+            encuentro.partidos.forEach(p => {
+                stats[encuentro.local].pj++;
+                stats[encuentro.visitante].pj++;
+
+                stats[encuentro.local].ds += (p.setsLoc - p.setsVis);
+                stats[encuentro.visitante].ds += (p.setsVis - p.setsLoc);
+                stats[encuentro.local].dg += (p.gamesLoc - p.gamesVis);
+                stats[encuentro.visitante].dg += (p.gamesVis - p.gamesLoc);
+
+                if (p.setsLoc > p.setsVis) {
+                    victoriasLoc++;
+                    let totalSets = p.setsLoc + p.setsVis;
+                    stats[encuentro.local].pts += (totalSets === 2) ? 3 : 2;
+                } else if (p.setsVis > p.setsLoc) {
+                    victoriasVis++;
+                    let totalSets = p.setsLoc + p.setsVis;
+                    stats[encuentro.visitante].pts += (totalSets === 2) ? 3 : 2;
+                }
+            });
+
+            if (victoriasLoc === 3) {
+                stats[encuentro.local].pts += 1;
+            }
+            if (victoriasVis === 3) {
+                stats[encuentro.visitante].pts += 1;
+            }
+        });
+
+        renderizarTablaZona('ying', stats);
+        renderizarTablaZona('yang', stats);
+        renderizarResultadosAnteriores();
+    }
+
+    function renderizarTablaZona(zona, stats) {
+        let listaOrdenada = Object.values(stats)
+            .filter(e => e.zona === zona)
+            .sort((a, b) => b.pts - a.pts || b.ds - a.ds || b.dg - a.dg);
+
+        let tbody = document.getElementById(`tabla-posiciones-${zona}-body`);
+        if (!tbody) return;
+        tbody.innerHTML = "";
+
+        listaOrdenada.forEach((eq, index) => {
+            let fila = `<tr>
+                <td><strong>${index + 1}°</strong></td>
+                <td>${eq.nombre}</td>
+                <td style="color: var(--primary); font-weight: bold;">${eq.pts}</td>
+                <td>${eq.pj}</td>
+                <td>${eq.ds > 0 ? '+' + eq.ds : eq.ds}</td>
+                <td>${eq.dg > 0 ? '+' + eq.dg : eq.dg}</td>
+            </tr>`;
+            tbody.innerHTML += fila;
+        });
+    }
+
+    function renderizarResultadosAnteriores() {
+    const tablaResultados = document.querySelector("#partidos .table-container:last-of-type tbody");
+    if (!tablaResultados || resultadosFecha1.length === 0) return;
+
+    tablaResultados.innerHTML = "";
+
+    // Mostramos las tres fechas en la sección de resultados anteriores
+    let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];
+
+    todosLosResultados.forEach((encuentro, idx) => {
+        let pGanadosLoc = 0;
+        let pGanadosVis = 0;
+        encuentro.partidos.forEach(p => {
+            if (p.setsLoc > p.setsVis) pGanadosLoc++;
+            else pGanadosVis++;
+        });
+
+        // Cada fecha tiene 4 encuentros (0 a 3 = F1, 4 a 7 = F2, 8 en adelante = F3)
+        let numFecha = "Fecha 1";
+if (idx >= 4 && idx < 8) numFecha = "Fecha 2";
+else if (idx >= 8 && idx < 12) numFecha = "Fecha 3";
+else if (idx >= 12 && idx < 16) numFecha = "Fecha 4";
+else if (idx >= 16 && idx < 20) numFecha = "Fecha 5";
+else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
+
+        let fila = `<tr>
+            <td>Canchas Gral</td>
+            <td>${numFecha}</td>
+            <td><strong>${encuentro.local}</strong> vs ${encuentro.visitante}</td>
+            <td style="color: var(--primary); font-weight: bold;">${pGanadosLoc} - ${pGanadosVis} <span style="font-size:0.75rem; color:#fff; font-weight:normal;">(Partidos)</span></td>
+        </tr>`;
+        tablaResultados.innerHTML += fila;
+    });
+}
+
+    // ==========================================
+    // FUNCIÓN PARA COMPARTIR EN WHATSAPP
+    // ==========================================
+    function compartirWhatsApp(seccion) {
+        let texto = "";
+        
+        if (seccion === 'partidos') {
+            texto = "🏆 *LIGA PADEL MASTER v2 - PRÓXIMOS CRUCES* 🏆%0A%0A";
+            texto += "📅 *Próxima Fecha (02/07)*%0A%0A";
+            texto += "🔵 *Zona Ying:*%0A";
+            texto += "• Los Rompecristales vs Punto y Asado%0A";
+            texto += "• Sin Globos no hay Paraíso vs Los Abandonados%0A%0A";
+            texto += "🟠 *Zona Yang:*%0A";
+            texto += "• El Retorno de la Sordeta vs Red Point%0A";
+            texto += "• Fernet Branca vs Los Branca%0A%0A";
+            texto += "📍 ¡Revisá los horarios en la web oficial!";
+        } else if (seccion === 'posiciones') {
+            texto = "📊 *LIGA PADEL MASTER v2 - TABLA DE POSICIONES* 📊%0A%0A";
+            texto += "¡Las tablas de posiciones ya están actualizadas con los bonus de la Fecha 1! Entrá a la web para ver en qué puesto quedó tu equipo. 🎾";
+        }
+        
+        window.open(`https://api.whatsapp.com/send?text=${texto}`, '_blank');
+    }
+
+    // ==========================================
+    // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
+    // ==========================================
+    function initCountdown() {
+        const fechaProximaFecha = new Date('2026-07-30T19:30:00'); 
+
+        const countdownElement = document.getElementById('countdown');
+        if (!countdownElement) return;
+
+        function updateTimer() {
+            const ahora = new Date();
+            const diferencia = fechaProximaFecha - ahora;
+
+            if (diferencia <= 0) {
+                if (diferencia > -14400000) { 
+                    countdownElement.innerHTML = "🟢 PRÓXIMA FECHA: ¡LA FECHA HA COMENZADO!";
+                } else {
+                    countdownElement.innerHTML = "PRÓXIMA FECHA: Finalizada (Esperando próxima programación)";
+                }
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            let textoTimer = "PRÓXIMA FECHA: ";
+            if (dias > 0) textoTimer += `${dias}d `;
+            textoTimer += `${horas.toString().padStart(2, '0')}h `;
+            textoTimer += `${minutos.toString().padStart(2, '0')}m `;
+            textoTimer += `${segundos.toString().padStart(2, '0')}s`;
+
+            countdownElement.innerHTML = textoTimer;
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSection('inicio'); 
+        initCountdown();
+        calcularTablas();
+    });
+</script>
+</body>
+</html>
