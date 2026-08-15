@@ -780,7 +780,7 @@
         <div class="table-container">
             <table>
                 <tbody>
-                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span>Por Cuartro Sin Pique <strong style="color: var(--primary);">vs</strong>NEW Mancos</td></tr>
+                    <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Por Cuartro Sin Pique <strong style="color: var(--primary);">vs</strong> NEW Mancos </td></tr>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Zona Ying:</span> Equipo 2 <strong style="color: var(--primary);">vs</strong> Golden Point </td></tr>
                     <tr><td style="border-top: 1px dashed rgba(255, 255, 255, 0.05);"><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> El Equipo de Los Profes <strong style="color: var(--primary);">vs</strong> Bandeja Team </td></tr>
                     <tr><td><span style="color: var(--yang-color); font-weight: 600;">Zona Yang:</span> Equipo Yang <strong style="color: var(--primary);">vs</strong> Los Impresentables </td></tr>
@@ -1152,7 +1152,7 @@ const resultadosFecha4 = [
         });
 
         // Unificamos las tres fechas cargadas para el cálculo global de la tabla
-let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5];
+let todosLosResultados = []; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
 
         todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
@@ -1220,7 +1220,7 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
     tablaResultados.innerHTML = "";
 
     // Mostramos las tres fechas en la sección de resultados anteriores
-    let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];
+    let todosLosResultados = [];  //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
 
     todosLosResultados.forEach((encuentro, idx) => {
         let pGanadosLoc = 0;
