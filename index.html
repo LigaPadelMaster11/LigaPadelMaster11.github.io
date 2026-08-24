@@ -776,7 +776,7 @@
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -15px; margin-bottom: 25px;">* Sujeto a cambios por la organización. Sistema todos contra todos ida y vuelta por zona.</p>
 
         <!-- FECHA 1 -->
-        <h3 class="fecha-title">Fecha 1 - 20/08/2026</h3>
+        <h3 class="fecha-title">Fecha 1 - 20/08/2026</h3> <span class="badge-finalizado">✓ FINALIZADA</span> 
         <div class="table-container">
             <table>
                 <tbody>
@@ -957,20 +957,20 @@
         // ---------- ZONA YANG ----------
         {
             zona: 'yang',
-            local: 'El Retorno de la Sordeta', visitante: 'Los Branca',
+            local: 'El Equipo de Los Profes', visitante: 'Bandeja Team',
             partidos: [
-                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 9 },  // 3-6 / 6-2 / 9-11 (Gana Los Branca +2)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 10 }, // 7-6 / 6-4 (Gana Sordeta +3)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-2 / 6-4 (Gana Sordeta +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 },  // 4-6 / 1-6 / 9-11 (Gana Bandeja Team +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 3, gamesVis: 12 }, // 1-6 / 2-6 (Gana Bandeja Team +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 12 }   // 4-6 / 3-6 (Gana Bandeja Team +3)
             ]
         },
         {
             zona: 'yang',
-            local: 'Fernet Branca', visitante: 'Red Point',
+            local: 'La Resaca', visitante: 'Los Impresentables',
             partidos: [
-                { setsLoc: 1, setsVis: 2, gamesLoc: 16, gamesVis: 23 }, // 7-6 / 4-6 / 5-11 (Gana Red Point +2)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 2-6 / 4-6 (Gana Red Point +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 12, gamesVis: 14 }  // 6-7 / 6-7 (Gana Red Point +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 2, gamesVis: 12 }, // 2-6 / 3-6 (Gana Los Impresentables +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 },  // 5-7 / 2-6 (Gana Los Impresentables +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 14, gamesVis: 10 }  // 7-5 / 7-5 (Gana La Resaca +3)
             ]
         }
     ]; // <-- AQUÍ ESTABA EL ERROR, YA QUEDÓ CORREGIDO Y CERRADO
