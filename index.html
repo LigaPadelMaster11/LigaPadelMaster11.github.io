@@ -705,14 +705,14 @@
                         <td>19:30 a 22:30</td>
                         <td>Por Cuatro Sin Pique</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>New Mancos</td>
+                        <td>Golden Point</td>
                     </tr>
                     <tr>
                         <td>Cancha 2</td>
                         <td>19:30 a 22:30</td>
                         <td>Natalia Natalia</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Golden Point</td>
+                        <td>New Mancos</td>
                     </tr>
                 </tbody>
             </table>
@@ -736,14 +736,14 @@
                         <td>19:30 a 22:30</td>
                         <td>El Equipo de Los Profes</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Bandeja Team</td>
+                        <td>Los Impresentables</td>
                     </tr>
                     <tr>
                         <td>Cancha 4</td>
                         <td>19:30 a 22:30</td>
                         <td>La Resaca</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Los Impresentables</td>
+                        <td>Bandeja Team</td>
                     </tr>
                 </tbody>
             </table>
@@ -929,7 +929,7 @@
     // BASE DE DATOS DE LA LIGA (CONFIGURACIÓN)
     // ==========================================
     const EQUIPOS = {
-        ying: ["Por Cuatro Sin Pique", "Equipo 2", "Golden Point", "New Mancos"],
+        ying: ["Por Cuatro Sin Pique", "Natalia Natalia", "Golden Point", "New Mancos"],
         yang: ["El Equipo de Los Profes", "La Resaca", "Los Impresentables", "Bandeja Team"]
     };
 
@@ -938,20 +938,20 @@
         // ---------- ZONA YING ----------
         {
             zona: 'ying',
-            local: 'Los Rompecristales', visitante: 'Los Abandonados',
+            local: 'Por Cuatro Sin Pique', visitante: 'New Mancos',
             partidos: [
-                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 7 },  // 7-5 / 6-2 (Gana Rompecristales +3)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 7 },  // 6-3 / 6-4 (Gana Rompecristales +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 }   // 5-7 / 2-6 (Gana Abandonados +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 12, gamesVis: 21 },  // 6-4 / 1-6 / 5-11 (Gana Por Cuatro Sin Pique +2) 
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 2-6 / 4-6 (Gana New Mancos +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 8, gamesVis: 13 }   // 5-7 / 3-6 (Gana New Mancos +3)
             ]
         },
         {
             zona: 'ying',
-            local: 'Punto y Asado', visitante: 'Sin Globos no hay Paraiso',
+            local: 'Natalia Natalia', visitante: 'Golden Point',
             partidos: [
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 },  // 6-4 / 6-2 (Gana Punto y Asado +3)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-2 / 6-2 (Gana Punto y Asado +3)
-                { setsLoc: 1, setsVis: 2, gamesLoc: 13, gamesVis: 12 }  // 6-1 / 6-7 / 8-11 (Gana Sin Globos +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 4-6 / 2-6 (Gana Golden Point +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 3-6 / 3-6 (Gana Golden Point +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 }  // 1-6 / 6-7 / 8-11 (Gana Golden Point +3)
             ]
         },
         // ---------- ZONA YANG ----------
