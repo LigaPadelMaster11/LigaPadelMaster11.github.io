@@ -1240,7 +1240,7 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
 
         let tbody = document.getElementById(`tabla-posiciones-${zona}-body`);
         if (!tbody) return;
-        tbody.inner = "";
+        tbody.innerHTML = "";
 
         listaOrdenada.forEach((eq, index) => {
             let fila = `<tr>
@@ -1251,7 +1251,7 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
                 <td>${eq.ds > 0 ? '+' + eq.ds : eq.ds}</td>
                 <td>${eq.dg > 0 ? '+' + eq.dg : eq.dg}</td>
             </tr>`;
-            tbody.inner += fila;
+            tbody.innerHTML += fila;
         });
     }
 
@@ -1259,7 +1259,7 @@ let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2, ...resultado
     const tablaResultados = document.querySelector("#partidos .table-container:last-of-type tbody");
     if (!tablaResultados || resultadosFecha1.length === 0) return;
 
-    tablaResultados.inner = "";
+    tablaResultados.innerHTML = "";
 
     // Mostramos las tres fechas en la sección de resultados anteriores
     let todosLosResultados = [...resultadosFecha1, ...resultadosFecha2...resultadosFecha3];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
