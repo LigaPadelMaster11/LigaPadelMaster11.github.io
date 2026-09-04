@@ -1347,7 +1347,7 @@ else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
             textoTimer += `${minutos.toString().padStart(2, '0')}m `;
             textoTimer += `${segundos.toString().padStart(2, '0')}s`;
 
-            countdownElement. = textoTimer;
+            countdownElement.innerHTML = textoTimer;
         }
 
         updateTimer();
