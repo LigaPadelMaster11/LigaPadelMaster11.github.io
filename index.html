@@ -787,8 +787,8 @@
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -15px; margin-bottom: 25px;">* Sujeto a cambios por la organización. Sistema todos contra todos ida y vuelta por zona.</p>
 
         <!-- FECHA 1 -->
-        <h3 class="fecha-title">Fecha 1 </h3> 
-        <div class="table-container">
+        <h3 class="fecha-title">Fecha 1 </h3> <span class="badge-finalizado">✓ FINALIZADA</span> 
+        <div class="table-container fecha-finalizada">
             <table>
                 <tbody>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Planta Baja:</span> Los Reyes del Cristal <strong style="color: var(--primary);">vs</strong> La Garra Desafilada </td></tr>
@@ -1164,7 +1164,7 @@ const resultadosFecha4 = [
         });
 
         // Unificamos las tres fechas cargadas para el cálculo global de la tabla
-let todosLosResultados = [...resultadosFecha1]; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
+let todosLosResultados = [ ...resultadosFecha1]; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
 
         todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
@@ -1232,7 +1232,7 @@ let todosLosResultados = [...resultadosFecha1]; //...resultadosFecha1, ...result
     tablaResultados.innerHTML = "";
 
     // Mostramos las tres fechas en la sección de resultados anteriores
-    let todosLosResultados = [...resultadosFecha1];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
+    let todosLosResultados = [ ...resultadosFecha1];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
 
     todosLosResultados.forEach((encuentro, idx) => {
         let pGanadosLoc = 0;
@@ -1288,7 +1288,7 @@ else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-10-08T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-10-22T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
