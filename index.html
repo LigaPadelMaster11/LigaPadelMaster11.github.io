@@ -947,42 +947,42 @@
 
     // ====== RESULTADOS OFICIALES CARGADOS - FECHA 1 ======
     const resultadosFecha1 = [
-        // ---------- ZONA YING ----------
+        // ---------- PLANTA BAJA ----------
         {
             zona: 'ying',
-            local: 'Por Cuatro Sin Pique', visitante: 'New Mancos',
+            local: 'Los Reyes del Cristal', visitante: 'La Garra Desafilada',
             partidos: [
-                { setsLoc: 2, setsVis: 1, gamesLoc: 12, gamesVis: 21 },  // 6-4 / 1-6 / 5-11 (Gana Por Cuatro Sin Pique +2) 
-                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 2-6 / 4-6 (Gana New Mancos +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 8, gamesVis: 13 }   // 5-7 / 3-6 (Gana New Mancos +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 6 },  // 6-1 / 7-5  (Gana Los Reyes del Cristal +3) 
+                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 18 },  // 4-6 / 6-3 / 11-9 (Gana Los Reyes del Cristal +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 3 }   // 6-3 / 6-0 (Gana New Mancos +3)
             ]
         },
         {
             zona: 'ying',
-            local: 'Natalia Natalia', visitante: 'Golden Point',
+            local: 'Los Mancos', visitante: 'Los Maletas Team',
             partidos: [
-                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 4-6 / 2-6 (Gana Golden Point +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 6, gamesVis: 12 },  // 3-6 / 3-6 (Gana Golden Point +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 }  // 1-6 / 6-7 / 8-11 (Gana Golden Point +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 24, gamesVis: 21 },  // 7-5 / 6-7 / 11-9  (Gana Los Mancos +2)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 21 },  // 6-4 / 4-6 / 8-11(Gana Los Maletas Team +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 9 }  // 3-6 / 6-7  (Gana Los Mancos +3)
             ]
         },
         // ---------- ZONA YANG ----------
         {
             zona: 'yang',
-            local: 'El Equipo de Los Profes', visitante: 'Bandeja Team',
+            local: 'A Confirmar', visitante: 'Que la Corra el Otro',
             partidos: [
-                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 },  // 4-6 / 1-6 / 9-11 (Gana Bandeja Team +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 3, gamesVis: 12 }, // 1-6 / 2-6 (Gana Bandeja Team +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 12 }   // 4-6 / 3-6 (Gana Bandeja Team +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 20, gamesVis: 14 },  // 6-4 / 3-6 / 11-4 (Gana Confirmar +2)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 3, gamesVis: 12 }, //  4-6 / 7-5 / 8-11 (Gana Que la Corra el Otro +2)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 17, gamesVis: 19 }   // 2-6 / 6-2 / 9-11 (Gana Que la Corra el Otro +2)
             ]
         },
         {
             zona: 'yang',
-            local: 'La Resaca', visitante: 'Los Impresentables',
+            local: 'La Sordeta del Padel III', visitante: 'La Volea de tu Vieja',
             partidos: [
-                { setsLoc: 0, setsVis: 2, gamesLoc: 2, gamesVis: 12 }, // 2-6 / 3-6 (Gana Los Impresentables +3)
-                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 13 },  // 5-7 / 2-6 (Gana Los Impresentables +3)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 14, gamesVis: 10 }  // 7-5 / 7-5 (Gana La Resaca +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 8 }, // 6-4 / 6-4 (Gana La Sordeta del Padel III +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 5, gamesVis: 12 },  // 1-6 / 4-6 (Gana La Volea de tu Vieja +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 10 }  // 6-4 / 7-6 (Gana La Sordeta del Padel III +3)
             ]
         }
     ]; // <-- AQUÍ ESTABA EL ERROR, YA QUEDÓ CORREGIDO Y CERRADO
@@ -1164,7 +1164,7 @@ const resultadosFecha4 = [
         });
 
         // Unificamos las tres fechas cargadas para el cálculo global de la tabla
-let todosLosResultados = []; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
+let todosLosResultados = [...resultadosFecha1]; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
 
         todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
@@ -1232,7 +1232,7 @@ let todosLosResultados = []; //...resultadosFecha1, ...resultadosFecha2, ...resu
     tablaResultados.innerHTML = "";
 
     // Mostramos las tres fechas en la sección de resultados anteriores
-    let todosLosResultados = [];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
+    let todosLosResultados = [...resultadosFecha1];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
 
     todosLosResultados.forEach((encuentro, idx) => {
         let pGanadosLoc = 0;
