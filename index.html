@@ -716,12 +716,12 @@
                         <td>19:30 a 22:30</td>
                         <td>Los Mancos</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>La Garra Desafilada</td>
+                        <td>Los Reyes del Cristal</td>
                     </tr>
                     <tr>
                         <td>Cancha 2</td>
                         <td>19:30 a 22:30</td>
-                        <td>Los Reyes del Cristal</td>
+                        <td>La Garra Desafilada</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>Los Maletas Team</td>
                     </tr>
@@ -747,12 +747,12 @@
                         <td>19:30 a 22:30</td>
                         <td>La Sordeta Team III</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
-                        <td>Que la corra el Otro</td>
+                        <td>A Confirmar</td>
                     </tr>
                     <tr>
                         <td>Cancha 4</td>
                         <td>19:30 a 22:30</td>
-                        <td>A Confirmar</td>
+                        <td>Que la corra el Otro</td>
                         <td style="color: var(--primary); font-weight: bold;">vs</td>
                         <td>La Volea de tu Vieja</td>
                     </tr>
@@ -838,9 +838,9 @@
             </table>
         </div>
 
-        <!-- FECHA 5 -->
+        <!-- FECHA 5 --> <span class="badge-finalizado">✓ FINALIZADA</span>
         <h3 class="fecha-title">Fecha 5 </h3>
-        <div class="table-container">
+        <div class="table-container fecha-finalizada">
             <table>
                 <tbody>
                     <tr><td><span style="color: var(--ying-color); font-weight: 600;">Planta Baja:</span> Los Mancos <strong style="color: var(--primary);">vs</strong> La Garra Desafilada </td></tr>
@@ -1152,39 +1152,39 @@ const resultadosFecha4 = [
         // ---------- ZONA YING ----------
         {
             zona: 'ying',
-            local: 'Golden Point', visitante: 'Por Cuatro Sin Pique',
+            local: 'Los Mancos', visitante: 'La Garra Desafilada',
             partidos: [
-                { setsLoc: 1, setsVis: 2, gamesLoc: 22, gamesVis: 22 },  // 6-7 / 6-4 / 10-11 (Gana Por Cuatro Sin Pique +2)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 },  // 6-3 / 6-2 (Gana Golden Point +3)
-                { setsLoc: 2, setsVis: 1, gamesLoc: 21, gamesVis: 18 }   // 4-6 / 6-2 / 11-10 (Gana Golden Point +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 },  // 6-7 / 6-4 / 10-11 (Gana Los Mancos +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 },  // 6-2 / 6-3 (Gana Los Mancos +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 21, gamesVis: 18 }   // 4-6 / 6-2 / 11-10 (Gana La Garra Desafilada +2)
             ]
         },
         {
             zona: 'ying',
-            local: 'New Mancos', visitante: 'Natalia Natalia',
+            local: 'Los Reyes del Cristal', visitante: 'Los Maletas Team',
             partidos: [
-                { setsLoc: 0, setsVis: 2, gamesLoc: 7, gamesVis: 12 },  // 4-6 / 3-6 (Gana Natalia Natalia +3)
-                { setsLoc: 1, setsVis: 2, gamesLoc: 17, gamesVis: 18 },  // 3-6 / 6-1 / 8-11 (Gana Natalia Natalia +2)
-                { setsLoc: 2, setsVis: 1, gamesLoc: 20, gamesVis: 18 }  // 6-4 / 3-6 / 11-8 (Gana New Mancos  +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 },  // 6-3 / 6-2 (Gana Los Reyes del Cristal +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 3 },  // 6-3 / 6-0  (Gana Los Reyes del Cristal +3)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 3, gamesVis: 12 }  // 3-6 / 0-6 / 11-8 (Gana Los Maletas Team  +3)
             ]
         },
         // ---------- ZONA YANG ----------
         {
             zona: 'yang',
-            local: 'Los Impresentables', visitante: 'El Equipo de Los Profes',
+            local: 'La Sordeta Padel III', visitante: 'Que la Corra el Otro',
             partidos: [
-                { setsLoc: 2, setsVis: 1, gamesLoc: 19, gamesVis: 22 },  // 7-6 / 1-6 / 11-10 (Gana Los Impresentables +2)
-                { setsLoc: 1, setsVis: 2, gamesLoc: 13, gamesVis: 19 }, // 6-2 / 0-6 / 7-11 (Gana El Equipo de Los Profes +2)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 6 }   // 6-3 / 6-3 (Gana Los Impresentables +3)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 18, gamesVis: 20 },  // 6-3 / 4-6 / 8-11 (Gana Que la Corra el Otro +2)
+                { setsLoc: 0, setsVis: 2, gamesLoc: 8, gamesVis: 13 }, // 6-7 / 2-6  (Gana Que la Corra el Otro +3)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 13, gamesVis: 9 }   // 6-3 / 6-3 (Gana La Sordeta Padel III +3)
             ]
         },
         {
             zona: 'yang',
-            local: 'Bandeja Team', visitante: 'La Resaca',
+            local: 'A Confirmar', visitante: 'La Volea de tu Vieja',
             partidos: [
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 5 }, // 2-6 / 6-4 / 7-11 (Gana Bandeja Team +3)
-                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 3 },  // 6-3 / 6-3 (Gana Bandeja Team +3)
-                { setsLoc: 2, setsVis: 1, gamesLoc: 22, gamesVis: 20 }  // 5-7 / 6-4 / 11-9 (Gana Bandeja Team +2)
+                { setsLoc: 2, setsVis: 0, gamesLoc: 12, gamesVis: 4 }, // 6-2 / 6-2  (Gana A Confirmar +3)
+                { setsLoc: 2, setsVis: 1, gamesLoc: 20, gamesVis: 20 },  // 2-6 / 7-6 / 11-8 (Gana A Confirmar +2)
+                { setsLoc: 1, setsVis: 2, gamesLoc: 22, gamesVis: 23 }  // 4-6 / 6-7 / 9-11 (Gana La Volea de tu Vieja +2)
             ]
         }
     ];
@@ -1202,7 +1202,7 @@ const resultadosFecha4 = [
         });
 
         // Unificamos las tres fechas cargadas para el cálculo global de la tabla
-let todosLosResultados = [ ...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4]; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
+let todosLosResultados = [ ...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5]; //...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5
 
         todosLosResultados.forEach(encuentro => {
             let victoriasLoc = 0;
@@ -1270,7 +1270,7 @@ let todosLosResultados = [ ...resultadosFecha1, ...resultadosFecha2, ...resultad
     tablaResultados.innerHTML = "";
 
     // Mostramos las tres fechas en la sección de resultados anteriores
-    let todosLosResultados = [ ...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
+    let todosLosResultados = [ ...resultadosFecha1, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4, ...resultadosFecha5];  //, ...resultadosFecha2, ...resultadosFecha3, ...resultadosFecha4
 
     todosLosResultados.forEach((encuentro, idx) => {
         let pGanadosLoc = 0;
@@ -1326,7 +1326,7 @@ else if (idx >= 20 && idx < 24) numFecha = "Fecha 6";
     // FUNCIÓN DE CUENTA REGRESIVA (AUTOMÁTICA)
     // ==========================================
     function initCountdown() {
-        const fechaProximaFecha = new Date('2026-11-12T19:30:00'); 
+        const fechaProximaFecha = new Date('2026-11-19T19:30:00'); 
 
         const countdownElement = document.getElementById('countdown');
         if (!countdownElement) return;
